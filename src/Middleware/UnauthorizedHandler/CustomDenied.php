@@ -1,7 +1,8 @@
 <?
 
-use Authorization\Middleware\UnauthorizedHandler\CakeRedirectHandler;
+namespace App\Middleware\UnauthorizedHandler;
 
+use Authorization\Middleware\UnauthorizedHandler\CakeRedirectHandler;
 use Authorization\Exception\Exception;
 use Cake\Http\Response;
 use Psr\Http\Message\ResponseInterface;
