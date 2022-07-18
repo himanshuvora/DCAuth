@@ -1,6 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
+use Authentication\PasswordHasher\DefaultPasswordHasher;
 use Migrations\AbstractMigration;
 
 class AddPostsAndUserstable extends AbstractMigration
@@ -15,17 +17,24 @@ class AddPostsAndUserstable extends AbstractMigration
     public function change()
     {
         $this->table('users')
-        ->addColumn('username','string')
-        ->addColumn('password','string')
-        ->addColumn('is_superuser','boolean',['default'=>false])
-        ->addColumn('role','string')
-        ->addTimestamps('created','modified')
-        ->create();
+            ->addColumn('username', 'string')
+            ->addColumn('password', 'string')
+            ->addColumn('is_superuser', 'boolean', ['default' => false])
+            ->addColumn('role', 'string')
+            ->addTimestamps('created', 'modified')
+            ->create();
 
         $this->table('posts')
-        ->addColumn('title','string')
-        ->addColumn('body','string')
-        ->addColumn('user_id','integer')
-        ->create();
+            ->addColumn('title', 'string')
+            ->addColumn('body', 'string')
+            ->addColumn('user_id', 'integer')
+            ->create();
+
+
+        $this->table('users')->insert([
+            // passwords are user = pwu and admin = pwa
+            ['username' => 'user', 'password' => (new DefaultPasswordHasher())->hash('pwu'), 'role' => 'user'],
+            ['username' => 'admin', 'password' => (new DefaultPasswordHasher())->hash('pwa'), 'role' => 'admin', 'is_superuser' => true],
+        ])->update();
     }
 }
