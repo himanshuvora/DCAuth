@@ -51,8 +51,11 @@ use Authorization\Middleware\AuthorizationMiddleware;
 use Authentication\Middleware\AuthenticationMiddleware;
 use Authorization\AuthorizationServiceProviderInterface;
 use App\Middleware\UnauthorizedHandler\RedirectWhenDenied;
+
 use Authentication\AuthenticationServiceProviderInterface;
 use Authorization\Middleware\RequestAuthorizationMiddleware;
+
+use Authorization\Exception\ForbiddenException;
 
 /**
  * Application setup class.

@@ -1,8 +1,8 @@
-<?
+<?php
 
+namespace App\Middleware\UnauthorizedHandler;
 
 use Cake\Http\Response;
-
 use Cake\Http\FlashMessage;
 use Authorization\Exception\Exception;
 use Psr\Http\Message\ResponseInterface;
